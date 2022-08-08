@@ -3,10 +3,6 @@ import './App.css';
 import ConverterField from './components/ConverterField';
 import { Button } from "@mui/material"
 import CompareArrowsIcon from '@mui/icons-material/CompareArrows';
-//дать правильные названия
-//сделать список валют
-//навести порядок
-
 
 function App() {
 
@@ -16,29 +12,28 @@ function App() {
   const [stateInputValue, setStateInputValue] = useState();
   const [listNameCurrencies, setListNameCurrencies] = useState([])
 
-
   useEffect(() => { fetchData() }, []);
   async function fetchData() {
     let response = await fetch("https://cdn.cur.su/api/latest.json")
     let currencyObject = await response.json();
     setData(currencyObject.rates)
     setListNameCurrencies(Object.keys(currencyObject.rates))
-
   };
 
   const calculateConvertValue = () =>
-    toRatesValue / fromRatesValue * stateInputValue;
+    (toRatesValue / fromRatesValue * stateInputValue).toFixed(2);
 
   function revers() {
     setStateInputValue(calculateConvertValue())
     setToRatesValue(fromRatesValue)
     setFromRatesValue(toRatesValue)
   };
-
+  
   return (
     <div className="App">
 
       <ConverterField
+        listNameCurrencies={listNameCurrencies}
         data={data}
         ratesValue={fromRatesValue}
         onChangeRates={(e) => setFromRatesValue(e.target.value)}
@@ -46,9 +41,12 @@ function App() {
         value={stateInputValue}
       />
 
-      <Button onClick={revers} ><CompareArrowsIcon sx={{ width: 50, height: 50 }} /></Button>
+      <Button onClick={revers} >
+        <CompareArrowsIcon sx={{ width: 50, height: 50 }} />
+      </Button>
 
       <ConverterField
+        listNameCurrencies={listNameCurrencies}
         data={data}
         ratesValue={toRatesValue}
         value={calculateConvertValue()}
