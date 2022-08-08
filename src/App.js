@@ -3,13 +3,18 @@ import './App.css';
 import ConverterField from './components/ConverterField';
 import { Button } from "@mui/material"
 import CompareArrowsIcon from '@mui/icons-material/CompareArrows';
+//дать правильные названия
+//сделать список валют
+//навести порядок
+
 
 function App() {
 
   const [data, setData] = useState([]);
-  const [ratesValue1, setRatesValue1] = useState();
-  const [ratesValue2, setRatesValue2] = useState();
-  const [text1, setText1] = useState();
+  const [fromRatesValue, setFromRatesValue] = useState("");
+  const [toRatesValue, setToRatesValue] = useState("");
+  const [stateInputValue, setStateInputValue] = useState();
+  const [listNameCurrencies, setListNameCurrencies] = useState([])
 
 
   useEffect(() => { fetchData() }, []);
@@ -17,39 +22,37 @@ function App() {
     let response = await fetch("https://cdn.cur.su/api/latest.json")
     let currencyObject = await response.json();
     setData(currencyObject.rates)
+    setListNameCurrencies(Object.keys(currencyObject.rates))
+
   };
 
-
-  const convert = (e) => {
-    setText1(e.target.value)
-  }
+  const calculateConvertValue = () =>
+    toRatesValue / fromRatesValue * stateInputValue;
 
   function revers() {
-
-
-  }
-
-
+    setStateInputValue(calculateConvertValue())
+    setToRatesValue(fromRatesValue)
+    setFromRatesValue(toRatesValue)
+  };
 
   return (
     <div className="App">
 
       <ConverterField
         data={data}
-        ratesValue={ratesValue1}
-        text1={text1}
-        onChangeRates={(e) => setRatesValue1(e.target.value)}
-        convert={convert}
-        value={text1}
+        ratesValue={fromRatesValue}
+        onChangeRates={(e) => setFromRatesValue(e.target.value)}
+        onInputValue={(e) => setStateInputValue(e.target.value)}
+        value={stateInputValue}
       />
 
-      <Button onClick={revers}><CompareArrowsIcon sx={{ width: 50, height: 50 }} /></Button>
+      <Button onClick={revers} ><CompareArrowsIcon sx={{ width: 50, height: 50 }} /></Button>
 
       <ConverterField
         data={data}
-        ratesValue={ratesValue2}
-        value={ratesValue2 / ratesValue1 * text1}
-        onChangeRates={(e) => setRatesValue2(e.target.value)}
+        ratesValue={toRatesValue}
+        value={calculateConvertValue()}
+        onChangeRates={(e) => setToRatesValue(e.target.value)}
       />
 
     </div>

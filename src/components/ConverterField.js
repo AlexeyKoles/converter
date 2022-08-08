@@ -20,7 +20,6 @@ const ConverterField = (props) => {
                         <InputLabel sx={{ ml: 2 }} id="demo-simple-select-label">Выберите валюту</InputLabel>
                         <Select
                             labelId="demo-simple-select-label"
-                            id="demo-simple-select"
                             value={props.ratesValue}
                             onChange={props.onChangeRates}
                             label="Age"
@@ -33,18 +32,13 @@ const ConverterField = (props) => {
                     </FormControl>
 
                     <TextField sx={{ mt: 5.5, ml: 2 }}
-                        id="n1"
+
                         type="number"
                         variant="standard"
                         autoComplete="off"
-                        onInput={props.convert}
+                        onInput={props.onInputValue}
                         value={props.value}
-
-
                     />
-
-
-
                     <Typography id="v1" sx={{ mt: 5, ml: 2 }} ></Typography>
                 </Box>
             </Box>
