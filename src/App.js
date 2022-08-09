@@ -1,24 +1,32 @@
-import React, { useState, useEffect } from 'react';
 import './App.css';
+import React, { useState, useEffect } from 'react';
 import ConverterField from './components/ConverterField';
 import { Button } from "@mui/material"
 import CompareArrowsIcon from '@mui/icons-material/CompareArrows';
 
 function App() {
 
-  const [data, setData] = useState([]);
   const [fromRatesValue, setFromRatesValue] = useState("");
   const [toRatesValue, setToRatesValue] = useState("");
   const [stateInputValue, setStateInputValue] = useState();
-  const [listNameCurrencies, setListNameCurrencies] = useState([])
+  const [сurrencies, setCurrencies] = useState([])
 
-  useEffect(() => { fetchData() }, []);
-  async function fetchData() {
+  useEffect(() => { fetchCurrencies() }, []);
+  async function fetchCurrencies() {
     let response = await fetch("https://cdn.cur.su/api/latest.json")
     let currencyObject = await response.json();
-    setData(currencyObject.rates)
-    setListNameCurrencies(Object.keys(currencyObject.rates))
+    let ratesArr = Object.entries(currencyObject.rates);
+    let rates = ratesArr.map((rate) => {
+      let objcurriencies = {
+        name: rate[0],
+        value: rate[1]
+      };
+      return objcurriencies
+    })
+    setCurrencies(rates)
   };
+
+  console.log(сurrencies)
 
   const calculateConvertValue = () =>
     (toRatesValue / fromRatesValue * stateInputValue).toFixed(2);
@@ -28,13 +36,13 @@ function App() {
     setToRatesValue(fromRatesValue)
     setFromRatesValue(toRatesValue)
   };
-  
+
   return (
     <div className="App">
 
       <ConverterField
-        listNameCurrencies={listNameCurrencies}
-        data={data}
+        text={"У меня есть"}
+        сurrencies={сurrencies}
         ratesValue={fromRatesValue}
         onChangeRates={(e) => setFromRatesValue(e.target.value)}
         onInputValue={(e) => setStateInputValue(e.target.value)}
@@ -46,8 +54,8 @@ function App() {
       </Button>
 
       <ConverterField
-        listNameCurrencies={listNameCurrencies}
-        data={data}
+        text={"Я получу"}
+        сurrencies={сurrencies}
         ratesValue={toRatesValue}
         value={calculateConvertValue()}
         onChangeRates={(e) => setToRatesValue(e.target.value)}

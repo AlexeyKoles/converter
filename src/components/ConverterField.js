@@ -7,12 +7,13 @@ import TextField from '@mui/material/TextField';
 import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 
+
 const ConverterField = (props) => {
 
     return (
         <form  >
             <Box sx={{ padding: 1 }}>
-                <Typography sx={{ mb: 1, ml: 1 }} >У меня есть</Typography>
+                <Typography sx={{ mb: 1, ml: 1 }} >{props.text}</Typography>
                 <Box sx={{ width: 400, height: 200, border: 1, borderColor: 'grey.500', borderRadius: 2 }}>
 
                     <FormControl fullWidth variant="standard" >
@@ -22,21 +23,18 @@ const ConverterField = (props) => {
                             onChange={props.onChangeRates}
                             label="Age"
                         >
-                            {props.listNameCurrencies.map((value, index) =>
-                                <MenuItem key={index} value={props.data[value]}>{value}</MenuItem>)}
+                            {props.сurrencies.map((currencies, index) =>
+                                <MenuItem key={index} value={currencies.value}>{currencies.name}</MenuItem>)}
                         </Select>
-
                     </FormControl>
 
                     <TextField sx={{ mt: 5.5, ml: 2 }}
-
                         type="number"
                         variant="standard"
                         autoComplete="off"
                         onInput={props.onInputValue}
                         value={props.value}
                     />
-                    <Typography id="v1" sx={{ mt: 5, ml: 2 }} ></Typography>
                 </Box>
             </Box>
         </form>
