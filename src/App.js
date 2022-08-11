@@ -26,13 +26,8 @@ function App() {
     setCurrencies(rates)
   };
 
-  console.log(сurrencies)
-
   const calculateConvertValue = () =>
     (toRatesValue / fromRatesValue * stateInputValue).toFixed(2);
-
-
-
 
   function revers() {
     setStateInputValue(calculateConvertValue())
