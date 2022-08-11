@@ -31,6 +31,9 @@ function App() {
   const calculateConvertValue = () =>
     (toRatesValue / fromRatesValue * stateInputValue).toFixed(2);
 
+
+
+
   function revers() {
     setStateInputValue(calculateConvertValue())
     setToRatesValue(fromRatesValue)
