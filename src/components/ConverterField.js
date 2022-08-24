@@ -12,7 +12,7 @@ const ConverterField = (props) => {
 
     return (
         <form  >
-            <Box sx={{ padding: 1 }}>
+            <Box className='converterField' sx={{ padding: 1 }}>
                 <Typography sx={{ mb: 1, ml: 1 }} >{props.text}</Typography>
                 <Box sx={{ width: 400, height: 200, border: 1, borderColor: 'grey.500', borderRadius: 2 }}>
 

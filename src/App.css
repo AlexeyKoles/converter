@@ -3,5 +3,20 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  padding: 20px;
   margin-top: 13%
+}
+
+@media (max-width:958px) {
+  .App {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .converterField {
+    width: 100%;
+  }
 }
