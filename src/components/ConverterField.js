@@ -7,14 +7,14 @@ import TextField from '@mui/material/TextField';
 import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 
-
 const ConverterField = (props) => {
 
     return (
-        <form  >
-            <Box className='converterField' sx={{ padding: 1 }}>
+
+        <Box >
+            <form  >
                 <Typography sx={{ mb: 1, ml: 1 }} >{props.text}</Typography>
-                <Box sx={{ width: 400, height: 200, border: 1, borderColor: 'grey.500', borderRadius: 2 }}>
+                <Box className='borderBox' sx={{ width: 300, height: 200, border: 1, borderColor: 'grey.500', borderRadius: 2 }}>
 
                     <FormControl fullWidth variant="standard" >
                         <InputLabel sx={{ ml: 2 }} id="demo-select-small">Выберите валюту</InputLabel>
@@ -36,8 +36,9 @@ const ConverterField = (props) => {
                         value={props.value}
                     />
                 </Box>
-            </Box>
-        </form>
+            </form>
+        </Box>
+
     )
 }
 

@@ -18,7 +18,8 @@ function App() {
     let ratesArr = Object.entries(currencyObject.rates);
     let rates = ratesArr.map((rate) => {
       let objcurriencies = {
-        name: rate[0],
+        name: 
+        rate[0],
         value: rate[1]
       };
       return objcurriencies
