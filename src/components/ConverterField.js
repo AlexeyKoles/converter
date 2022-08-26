@@ -14,7 +14,7 @@ const ConverterField = (props) => {
         <Box >
             <form  >
                 <Typography sx={{ mb: 1, ml: 1 }} >{props.text}</Typography>
-                <Box className='borderBox' sx={{ width: 300, height: 200, border: 1, borderColor: 'grey.500', borderRadius: 2 }}>
+                <Box sx={{ width: 300, height: 200, border: 1, borderColor: 'grey.500', borderRadius: 2 }}>
 
                     <FormControl fullWidth variant="standard" >
                         <InputLabel sx={{ ml: 2 }} id="demo-select-small">Выберите валюту</InputLabel>
