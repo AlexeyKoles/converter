@@ -13,7 +13,9 @@ function App() {
 
   useEffect(() => { fetchCurrencies() }, []);
   async function fetchCurrencies() {
+    
     let response = await fetch("https://cdn.cur.su/api/latest.json")
+    // API сломался, пытаюсь найти другой
     let currencyObject = await response.json();
     let ratesArr = Object.entries(currencyObject.rates);
     let rates = ratesArr.map((rate) => {
@@ -26,6 +28,7 @@ function App() {
     })
     setCurrencies(rates)
   };
+  console.log(сurrencies)
 
   const calculateConvertValue = () =>
     (toRatesValue / fromRatesValue * stateInputValue).toFixed(2);
