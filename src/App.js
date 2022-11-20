@@ -13,9 +13,8 @@ function App() {
 
   useEffect(() => { fetchCurrencies() }, []);
   async function fetchCurrencies() {
-    
-    let response = await fetch("https://cdn.cur.su/api/latest.json")// API сломался, пытаюсь найти другой
-    
+   
+    let response = await fetch("https://openexchangerates.org/api/latest.json?app_id=ebc1bac5c83d4b54a2055e9318dada23")
     let currencyObject = await response.json();
     let ratesArr = Object.entries(currencyObject.rates);
     let rates = ratesArr.map((rate) => {
